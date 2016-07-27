@@ -1,0 +1,4 @@
+1. Import from Git project cloneURI
+2. Select correct origin which is configured in windows>preferences> (otherwise you will get wrong project)
+	key = remote.originx.url
+	url = repositories url
