@@ -1,0 +1,108 @@
+
+    "use strict";$(function(){function t(t,e){var a=t.text(),c=a?parseInt(a):0;c+=e,c>0?t.text(c):0===c&&t.text("")}var e="https://m.douban.com/rexxar/api/v2/";$(".react-btn").bind("click",function(a){var c=$(this),r=c.find(".react-text"),n=c.find(".react-num"),i=c.data(),d=void 0;d=0===i.reaction_type?1:0;var o={reaction_type:d,ck:get_cookie("ck")},s=""+e+i.type+"/"+i.object_id+"/react";$.ajax({type:"post",url:s,data:o,traditional:!0,beforeSend:function(t){t.withCredentials=!0},xhrFields:{withCredentials:!0},success:function(e){c.data("reaction_type",e.reaction_type),1===e.reaction_type?(t(n,1),r.text("已赞"),c.removeClass("react-add").addClass("react-cancel")):(t(n,-1),r.text("赞"),c.removeClass("react-cancel").addClass("react-add"))}})})});
+    "use strict";function show_doulist_remind(){var e="         <div id='doulist-new-function-remind'>             <div class='title'>“喜欢”升级啦</div>             <div class='desc'>觉得内容不错，点个赞吧；</br>想Mark，收藏到豆列是最好的选择</div>             <button class='i_know'>我知道了</button>         </div>     ",o=document.createElement("DIV");o.innerHTML=e,o=o.firstElementChild;var t=document.querySelector(".action-react");if(t){t.style.position="relative",t.appendChild(o);var i=document.querySelector(".i_know");i.addEventListener("click",close_doulist_remind)}}function close_doulist_remind(){var e=document.getElementById("doulist-new-function-remind");e&&e.remove()}!function(){localStorage&&localStorage.getItem("douban-fav-remind")||get_cookie&&get_cookie("douban-fav-remind")||(show_doulist_remind(),localStorage&&localStorage.setItem("douban-fav-remind","1"),set_cookie&&set_cookie({"douban-fav-remind":1},36500,"douban.com","/"))}();
+;
+            $(function(){function a(a,i){a.find(".sharing-wechat-qrcode").html('<img src="//img3.doubanio.com/dae/qrgen/v2/'+encodeURIComponent(i)+'.png" alt="扫描二维码" />')}var i=$(document),e={weibo:"bshare_sina",qq:"bshare_qqim",qzone:"bshare_qzone"},n={qq:{width:800,height:600},qzone:{width:800,height:600}};i.delegate(".sharing-indicator","click",function(){var i=$(this).closest(".sharing"),e=i.find(".sharing-layer");if(e.hasClass("is-hidden")){var n=i.data("target").url;e.removeClass("is-hidden"),a(e,n)}else e.addClass("is-hidden")}),$("body").bind("click",function(a){if(!$(a.target).hasClass("sharing-indicator")){var i=$(".sharing-layer");i.hasClass("is-hidden")||$(a.target).closest(".sharing-layer").length||i.addClass("is-hidden")}}),$(".sharing-layer").bind("click",function(a){return $(a.target).closest(".sharing-list").length?void $(".sharing-layer").addClass("is-hidden"):void a.stopPropagation()}),i.delegate("[data-share]","click",function(){var a=$(this),i=a.data("share"),s=$(this).closest(".sharing"),t=s.data("target")||{},r=new SocialSharing({weibo:{appkey:"3015934887"}},t),d="https://www.douban.com/link2?type=redir&vendor="+e[i]+"&url="+encodeURIComponent(r.get(i).url);r.openInNewWindow(d,n[i])})});
+        ;
+    'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+$(function () {
+  $('.cmt-img img').on('load', function () {
+    var $this = $(this);
+    var $p = $this.parents('.cmt-img');
+    $p.find('.loading').hide();
+  });
+  var attrs = ['margin-top', 'margin-left', 'width', 'height'];
+  var small = function small($e) {
+    var css = attrs.reduce(function (a, c) {
+      return _extends({}, a, _defineProperty({}, c, $e.data(c)));
+    }, {});
+    return $e.css(css);
+  };
+  var large = function large($e) {
+    var data = attrs.reduce(function (a, c) {
+      return _extends({}, a, _defineProperty({}, c, $e.css(c)));
+    }, {});
+    var css = attrs.reduce(function (a, c) {
+      if (~['width', 'height'].indexOf(c)) {
+        return _extends({}, a, _defineProperty({}, c, 'auto'));
+      }
+      return _extends({}, a, _defineProperty({}, c, 0));
+    }, {});
+    return $e.data(data).css(css);
+  };
+  $(document).on('click', '.cmt-img img', function () {
+    var $this = $(this);
+    var $p = $this.parents('.cmt-img');
+    if (!$p.hasClass('cmt-img-large')) {
+      $this.data('thumbnail', $this.attr('src')).attr('src', $this.data('orig'));
+      large($this);
+      $p.addClass('cmt-img-large');
+      if (!$p.data('loaded')) {
+        $p.data('loaded', true).find('.loading').show();
+      }
+    } else {
+      $this.attr('src', $this.data('thumbnail'));
+      small($this);
+      $p.removeClass('cmt-img-large');
+    }
+  });
+});
+;
+    'use strict';
+
+$(function () {
+  var $btnAddImg = $('.btn-add-img');
+  var $previewWrapper = $('.img-preview-wrapper');
+  var $preview = $('.img-preview');
+  var $fipt = $('input[name=img]');
+
+  $(document).on('click', '.btn-add-img', function () {
+    $fipt.click();
+  });
+
+  $(document).on('click', '.img-preview-item .del', function () {
+    $fipt.val('').trigger('change');
+  });
+
+  $(document).on('change', 'input[name=img]', function () {
+    var file = this.files[0];
+    if (!file) {
+      $btnAddImg.show();
+      $previewWrapper.hide();
+      $preview.html('');
+      return;
+    }
+    var reader = new FileReader();
+    var W = 48;
+    var H = W;
+    reader.onload = function (e) {
+      var base64 = e.target.result;
+      var $item = $('<div class="img-preview-item"></div>');
+      var $wrapper = $('<div class="img-wrapper"></div>');
+      $item.append($wrapper).append('<div class="del">\u5220\u9664\u56FE\u7247</div>');
+      var img = new Image();
+      img.src = base64;
+      img.onload = function () {
+        var w = this.width;
+        var h = this.height;
+        if (w / h > W / H) {
+          this.style.height = H + 'px';
+          this.style.marginLeft = (W - w * H / h) / 2 + 'px';
+        } else {
+          this.style.width = W + 'px';
+          this.style.marginTop = (H - h * W / w) / 2 + 'px';
+        }
+      };
+      $wrapper.append($(img));
+      $btnAddImg.hide();
+      $previewWrapper.show();
+      $preview.append($item);
+    };
+    reader.readAsDataURL(file);
+  });
+});

@@ -1,4 +1,4 @@
-package com.javabase.other;
+package com.javabase.factory;
 
 /***
  * 懒汉法(单线程)

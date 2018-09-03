@@ -1,4 +1,4 @@
-package com.javabase.other;
+package com.javabase.factory;
 
 /***
  * 简单的线程安全

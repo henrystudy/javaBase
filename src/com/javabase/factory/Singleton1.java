@@ -1,4 +1,4 @@
-package com.javabase.other;
+package com.javabase.factory;
 /***
  * 饿汉法
  * 顾名思义，饿汉法就是在第一次引用该类的时候就创建对象实例，而不管实际是否需要创建。
@@ -28,6 +28,5 @@ public class Singleton1
 		
 		System.out.println("s1 == s2: " + (s1 == s2));
 		System.out.println(s1.toString() + "\n" + s2.toString());
-	}
-
+	}	
 }
