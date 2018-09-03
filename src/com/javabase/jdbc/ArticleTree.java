@@ -9,6 +9,8 @@ import java.sql.Statement;
 /***
  * 树状结构打印Article这张表的记录
  * 使用递归
+ * tree()打印出所有child
+ * show()建立连接并调用tree()
  * @author henry
  *
  */
@@ -60,7 +62,6 @@ public class ArticleTree
 	{
 		Statement stmt = null;
 		ResultSet rs = null;
-		
 		
 		StringBuffer strPre = new StringBuffer("");
 		for(int i=0; i<level; i++)
