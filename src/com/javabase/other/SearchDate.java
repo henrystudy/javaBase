@@ -1,5 +1,6 @@
 package com.javabase.other;
 
+
 /**
 * 调用的SortDate类中定义的Date类的排序和比较方法bubbleSort(), compareDate()
 *
@@ -29,7 +30,7 @@ public class SearchDate
 	int binarySearchDate(Date[] days, Date day)
 	{
 		Date d = new Date();
-		d.bubbleSort(days);//调的SortDate类中定义的Date类的方法
+		d.bubbleSort(days);//调的SortDate类>Date类的方法
 		
 		int startPos = 0;
 		int endPos = days.length - 1;

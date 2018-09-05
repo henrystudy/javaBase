@@ -1,3 +1,5 @@
+package com.javabase.other;
+
 /**
 * 自定义引用类型的比较方法，据此排序
 *
