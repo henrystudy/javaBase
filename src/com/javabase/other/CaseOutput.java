@@ -59,7 +59,13 @@ public class CaseOutput
 		
 	}
 	
-	//输出字符串中特定字符串出现的次数#1
+	/***
+	 * 输出字符串中特定字符串出现的次数#1
+	 * 截取subString使用equals比对
+	 * @param str
+	 * @param substr
+	 * @return
+	 */
 	int countStr1(String str, String substr)
 	{
 		int countNum = 0;
