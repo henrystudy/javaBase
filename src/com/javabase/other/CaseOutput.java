@@ -78,7 +78,14 @@ public class CaseOutput
 		
 	}
 	
-	//输出字符串中特定字符串出现的次数#2
+	/***
+	 * 输出字符串中特定字符串出现的次数#2
+	 * str.indexOf(subStr)方法返回匹配子串的index
+	 * 如果可以匹配，把匹配完substring前面的字段减掉并返回剩余String继续匹配
+	 * @param str
+	 * @param substr
+	 * @return
+	 */
 	int countStr2(String str, String substr)
 	{
 		int countNum = 0;
