@@ -32,7 +32,7 @@ public class XmlTest01 {
         PersonHandler handler = new PersonHandler();
         //5、解析
         parser.parse(Thread.currentThread().getContextClassLoader()
-                        .getResourceAsStream("com/javabase/server/basic/person.xml")
+                        .getResourceAsStream("com/javabase/server/basic/servlet/basic/person.xml")
                 , handler);
 
         //获取xml数据

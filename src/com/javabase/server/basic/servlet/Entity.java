@@ -1,4 +1,4 @@
-package com.javabase.server;
+package com.javabase.server.basic.servlet;
 
 /**
  * @description: 根据serveletName获取实体类
@@ -12,11 +12,6 @@ public class Entity {
     private String clzName;
 
     public Entity() {
-    }
-
-    public Entity(String servletName, String clzName) {
-        this.servletName = servletName;
-        this.clzName = clzName;
     }
 
     public String getservletName() {

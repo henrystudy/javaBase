@@ -1,4 +1,4 @@
-package com.javabase.server;
+package com.javabase.server.basic.servlet;
 
 import java.util.HashSet;
 import java.util.Set;

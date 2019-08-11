@@ -7,5 +7,9 @@ package com.javabase.server.basic.servlet;
  * @modified by:
  */
 
-public class LoginServlet {
+public class LoginServlet implements Servlet{
+    @Override
+    public void service() {
+        System.out.println("LoginServlet");
+    }
 }

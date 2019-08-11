@@ -1,6 +1,5 @@
-package com.javabase.server;
+package com.javabase.server.basic.servlet;
 
-import com.javabase.server.basic.Person;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -9,18 +8,19 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @description: 解析web.xml
+ * @description: 解析web.xml并反射到对应的class
  * @author: Henry Zheng
  * @date: Created in 12:48 2019/8/4
  * @modified by:
  */
 
 public class XmlTest02 {
-    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         //SAX解析
         //1、获取解析工厂
         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -31,10 +31,11 @@ public class XmlTest02 {
         WebHandler handler = new WebHandler();
         //5、解析
         parser.parse(Thread.currentThread().getContextClassLoader()
-                        .getResourceAsStream("com/javabase/server/web.xml")
+                        .getResourceAsStream("com/javabase/server/basic/servlet/web.xml")
                 , handler);
 
         //获取xml数据
+        /* 数据直接传到WebContex做处理，不在本地处理
         List<Mapping> mappings = handler.getMappings();
         List<Entity> entities = handler.getEntities();
 
@@ -46,7 +47,17 @@ public class XmlTest02 {
         System.out.println(entities.size());
         for (Entity e:entities){
             System.out.println(e.getservletName() + "-->" + e.getClzName());
-        }
+        }*/
+
+        //数据传到WebContext处理
+        WebContext context = new WebContext(handler.getMappings(),handler.getEntities());
+
+        //通过反射获取到patternUrl对应的Sevlet实例
+        String clzName = context.getClz("/g");
+        Class clz = Class.forName(clzName);
+        Servlet servlet = (Servlet) clz.getConstructor().newInstance();
+        System.out.println(servlet);
+        servlet.service();
     }
 }
 
